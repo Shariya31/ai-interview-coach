@@ -1,0 +1,29 @@
+{
+  "name": "ai-interview-coach",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+   "workspaces": [
+    "apps/*",
+    "services/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shariya31/ai-interview-coach.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Shariya31/ai-interview-coach/issues"
+  },
+  "homepage": "https://github.com/Shariya31/ai-interview-coach#readme"
+}

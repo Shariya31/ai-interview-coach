@@ -1,0 +1,8 @@
+# TODO: CI/CD for main branch
+# Steps (planned):
+# 1. Trigger on push to main
+# 2. Checkout code
+# 3. Install dependencies
+# 4. Build all services/apps
+# 5. Build and push Docker images to registry
+# 6. Deploy to chosen environment (to be added later)
