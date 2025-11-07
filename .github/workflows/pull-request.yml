@@ -1,0 +1,7 @@
+# TODO: CI workflow for pull requests
+# Steps (planned):
+# 1. Checkout code
+# 2. Install dependencies
+# 3. Lint + test
+# 4. Build
+# 5. (Later) Run Docker build to ensure image builds successfully

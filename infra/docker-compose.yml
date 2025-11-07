@@ -1,0 +1,8 @@
+# docker-compose placeholder
+# Will define services:
+# - auth-service
+# - question-service
+# - transcription-service
+# - evaluation-service
+# - analytics-service
+# - frontend (nginx or shell)
