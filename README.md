@@ -1,42 +1,20 @@
-# AI Interview Coach
+# 🧠 AI Interview Coach
 
-AI Interview Coach is an AI-powered platform that helps users practice technical and behavioral interviews in a realistic environment.  
-It uses AI to generate personalized questions, record and analyze spoken answers, and provide structured feedback.
+An AI-powered virtual interview coach that helps users practice real-world technical and behavioral interviews.
 
----
+## 🚀 Overview
 
-## 🧩 Architecture Overview
-This project follows a **monorepo structure** with **micro-frontends** (React) and **microservices** (Node.js + Express):
+AI Interview Coach provides:
+- Personalized mock interviews using AI-generated questions.
+- Real-time transcription and sentiment analysis.
+- Automated performance evaluation with feedback.
+- Analytics dashboard showing strengths and weaknesses.
 
-- **Frontend (apps/)**  
-  - `mfe-shell` – the main host container for all MFEs  
-  - `mfe-interview` – handles live interview simulations  
-  - `mfe-dashboard` – shows feedback, stats, and progress
+## 🏗️ Architecture
 
-- **Backend (services/)**  
-  - `auth-service` – user authentication and token management  
-  - `question-service` – question generation using AI  
-  - `transcription-service` – converts voice to text  
-  - `evaluation-service` – analyzes answers and provides feedback  
-  - `analytics-service` – tracks user performance and improvement
+- **Frontend:** React micro-frontends (Vite, Tailwind, Recoil, Redux).
+- **Backend:** Node.js microservices (Express, MongoDB, Redis, OpenAI API).
+- **Infrastructure:** Docker, GitHub Actions CI/CD, and optional AWS deployment.
 
-- **Infra/** – docker-compose, deployment, CI/CD
-- **docs/** – documentation, design decisions
+## 📁 Monorepo Structure
 
----
-
-## 🗺 Roadmap
-**Phase 1:** Setup monorepo skeleton and documentation  
-**Phase 2:** Build core microservices and connect MFEs  
-**Phase 3:** Integrate AI models and add CI/CD pipelines  
-**Phase 4:** Dockerize and deploy to cloud
-
----
-
-## ⚙️ Workspaces
-Uses **npm workspaces** to manage multiple services and apps efficiently.
-
----
-
-## 🚀 Getting Started (for later)
-Instructions will be added once services and apps are implemented.

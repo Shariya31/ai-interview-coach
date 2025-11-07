@@ -1,6 +1,17 @@
-node_modules/
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build
+dist
+build
+
+# Env
 .env
-dist/
-build/
-.DS_Store
-coverage/
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
