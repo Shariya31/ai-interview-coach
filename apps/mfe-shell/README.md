@@ -1,13 +1,24 @@
-Example: `apps/mfe-interview/README.md`
+# MFE Shell (AI Interview Coach)
 
-```markdown
-# MFE – Interview
+This is the main micro-frontend container app for AI Interview Coach.  
+It serves as the entry point and shell that dynamically loads other micro-frontends (e.g., Interview, Dashboard).
 
-### Purpose
-A micro-frontend responsible for conducting mock interviews.  
-Displays questions, records answers, and shows real-time transcription.
+## 🚀 Tech Stack
+- React (Vite)
+- Tailwind CSS
+- Docker (for deployment)
 
-### Tech Stack (planned)
-- React + Vite + TailwindCSS  
-- Module Federation (for micro-frontend integration)  
-- Redux / Recoil for state management
+## 🧩 Setup
+
+### Local Development
+```bash
+cd apps/mfe-shell
+npm install
+npm run dev
+
+Runs on: http://localhost:5173
+
+docker build -t mfe-shell .
+docker run -p 8080:80 mfe-shell
+
+Runs on: http://localhost:8080
