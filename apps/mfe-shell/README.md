@@ -22,3 +22,8 @@ docker build -t mfe-shell .
 docker run -p 8080:80 mfe-shell
 
 Runs on: http://localhost:8080
+
+## 🩺 Health Check
+When running via Docker:
+- The app should be available at http://localhost:8080/
+- To verify: open in browser and check for "AI Interview Coach — Shell" message.

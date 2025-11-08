@@ -6,3 +6,9 @@
 # - evaluation-service
 # - analytics-service
 # - frontend (nginx or shell)
+version: "3.9"
+services:
+  mfe-shell:
+    build: ../apps/mfe-shell
+    ports:
+      - "8080:80"
