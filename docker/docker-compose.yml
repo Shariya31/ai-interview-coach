@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  frontend:
+    container_name: ai_frontend
+    build:
+      context: ../frontend
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+
+  api-gateway:
+    container_name: ai_api_gateway
+    build:
+      context: ../backend/services/api-gateway
+    ports:
+      - "4000:4000"
+    env_file:
+      - ../backend/services/api-gateway/.env
+    restart: unless-stopped
+  
+  auth-service:
+    container_name: ai_auth_service
+    build:
+      context: ../backend/services/auth-service
+    ports:
+      - "5000:5000"
+    env_file:
+      - ../backend/services/auth-service/.env   
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  mongo:
+    container_name: ai_mongo
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
