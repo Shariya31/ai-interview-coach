@@ -18,6 +18,8 @@ services:
       - "4000:4000"
     env_file:
       - ../backend/services/api-gateway/.env
+    depends_on:
+      - auth-service
     restart: unless-stopped
   
   auth-service:

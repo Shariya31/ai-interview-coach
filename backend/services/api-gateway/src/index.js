@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import authProxy from "./proxies/auth.proxy.js";
 
 const app = express();
 
@@ -10,6 +11,10 @@ app.use(
   })
 );
 
+// ⬇️ proxy FIRST (no body parsing)
+app.use("/auth", authProxy);
+
+// ⬇️ body parser ONLY for gateway-owned routes
 app.use(express.json());
 
 app.get("/health", (req, res) => {
