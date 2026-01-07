@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import authProxy from "./proxies/auth.proxy.js";
+import interviewProxy from "./proxies/interview.proxy.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(
 
 // ⬇️ proxy FIRST (no body parsing)
 app.use("/auth", authProxy);
+app.use(interviewProxy);
 
 // ⬇️ body parser ONLY for gateway-owned routes
 app.use(express.json());
