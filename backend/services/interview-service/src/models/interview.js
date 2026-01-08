@@ -32,6 +32,16 @@ const interviewSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+
+    resumePath: {
+      type: String,
+      default: null,
+    },
+
+    resumeText: {
+      type: String,
+      default: null,
+    },
   },
   { timestamps: true }
 );
