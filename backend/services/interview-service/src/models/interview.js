@@ -23,6 +23,11 @@ const interviewSchema = new mongoose.Schema(
       },
     ],
 
+    currentQuestionIndex: {
+      type: Number,
+      default: 0,
+    },
+
     overallScore: {
       type: Number,
       default: null,
@@ -42,6 +47,28 @@ const interviewSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+
+    cleanedResumeText: {
+      type: String,
+      default: null,
+    },
+
+    extractedSkills: {
+      type: [String],
+      default: [],
+    },
+
+    detectedRole: {
+      type: String,
+      default: null,
+    },
+
+    answers: [
+      {
+        questionIndex: Number,
+        answer: String,
+      },
+    ],
   },
   { timestamps: true }
 );

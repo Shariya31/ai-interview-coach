@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchMyInterviews } from "../api/interviewApi";
 import Header from "../../../shared/components/Header";
+import { Link } from "react-router-dom";
 
 const InterviewDashboard = () => {
   const token = useSelector((state) => state.auth.token);
@@ -27,7 +28,7 @@ const InterviewDashboard = () => {
 
   return (
     <div className="p-6">
-        <Header/>
+      <Header />
       <h1 className="text-2xl font-bold mb-4">My Interviews</h1>
 
       {interviews.length === 0 ? (
@@ -43,6 +44,12 @@ const InterviewDashboard = () => {
               <span>
                 {new Date(interview.createdAt).toLocaleString()}
               </span>
+              <Link
+                to={`/interviews/${interview._id}`}
+                className="text-blue-600 underline"
+              >
+                View Interview
+              </Link>
             </li>
           ))}
         </ul>

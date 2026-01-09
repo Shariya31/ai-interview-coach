@@ -41,10 +41,8 @@ services:
       context: ../backend/services/interview-service
     ports:
       - "6000:6000"
-    environment:
-      - PORT=6000
-      - MONGO_URI=mongodb://mongo:27017/ai-interviewer
-      - JWT_SECRET=supersecretkey
+    env_file:
+      - ../backend/services/interview-service/.env
     depends_on:
       - mongo
     restart: unless-stopped

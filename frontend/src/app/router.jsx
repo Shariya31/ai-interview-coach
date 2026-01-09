@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login, Register } from "../features/auth";
 import RequireAuth from "../shared/components/RequireAuth";
-import Header from "../shared/components/Header";
 import InterviewDashboard from "../features/interviews/pages/InterviewDashboard";
+import InterviewDetails from "../features/interviews/pages/InterviewDetails";
 
 // const Dashboard = () => (
 //   <>
@@ -20,6 +20,7 @@ const AppRouter = () => {
         <Route element={<RequireAuth />}>
           <Route path="/" element={<InterviewDashboard />} />
           <Route path="/dashboard" element={<InterviewDashboard />} />
+          <Route path="/interviews/:id" element={<InterviewDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
