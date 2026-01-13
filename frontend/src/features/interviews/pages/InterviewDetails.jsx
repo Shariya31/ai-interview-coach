@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from '../../../shared/utils/api'
@@ -45,6 +45,12 @@ const InterviewDetails = () => {
             ) : (
                 <p>No questions generated yet.</p>
             )}
+            <Link
+                to={`/interviews/${interview._id}/run`}
+                className="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+            >
+                Start Interview
+            </Link>
         </div>
     );
 };

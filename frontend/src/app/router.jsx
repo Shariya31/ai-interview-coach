@@ -3,6 +3,7 @@ import { Login, Register } from "../features/auth";
 import RequireAuth from "../shared/components/RequireAuth";
 import InterviewDashboard from "../features/interviews/pages/InterviewDashboard";
 import InterviewDetails from "../features/interviews/pages/InterviewDetails";
+import InterviewRunner from "../features/interviews/pages/InterviewRunner";
 
 // const Dashboard = () => (
 //   <>
@@ -21,6 +22,7 @@ const AppRouter = () => {
           <Route path="/" element={<InterviewDashboard />} />
           <Route path="/dashboard" element={<InterviewDashboard />} />
           <Route path="/interviews/:id" element={<InterviewDetails />} />
+          <Route path="/interviews/:id/run" element={<InterviewRunner />} />
         </Route>
       </Routes>
     </BrowserRouter>

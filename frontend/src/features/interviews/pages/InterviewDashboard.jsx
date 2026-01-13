@@ -9,6 +9,16 @@ const InterviewDashboard = () => {
   const [interviews, setInterviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const socket = new WebSocket("ws://localhost:8000");
+
+  socket.onopen = () => {
+    socket.send("Hello voice service");
+  };
+
+  socket.onmessage = (event) => {
+    console.log("WS reply:", event.data);
+  };
+
   useEffect(() => {
     const loadInterviews = async () => {
       try {
