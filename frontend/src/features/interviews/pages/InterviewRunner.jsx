@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from '../../../shared/utils/api'
 import { useAudioRecorder } from "../../voice/hooks/useAudioRecorder";
+import { useAiVoice } from "../hooks/useAiVoice";
 
 const InterviewRunner = () => {
   const { id } = useParams();
@@ -16,6 +17,7 @@ const InterviewRunner = () => {
   const [loading, setLoading] = useState(false);
 
   const socketRef = useRef(null);
+  const { speak } = useAiVoice();
 
   useEffect(() => {
     socketRef.current = new WebSocket("ws://localhost:8000");
@@ -43,7 +45,7 @@ const InterviewRunner = () => {
     };
   }, []);
 
-  const { startRecording, stopRecording } =  useAudioRecorder(socketRef);
+  const { startRecording, stopRecording } = useAudioRecorder(socketRef);
 
   const api = axios.create({
     baseURL: API_BASE_URL,
@@ -56,6 +58,8 @@ const InterviewRunner = () => {
     setLoading(true);
     const res = await api.post(`/interviews/${id}/start`);
     setQuestion(res.data.currentQuestion);
+    console.log('calling speak')
+    speak(res.data.currentQuestion.question);
     setStarted(true);
     setLoading(false);
   };
@@ -68,6 +72,8 @@ const InterviewRunner = () => {
 
     if (res?.data?.nextQuestion) {
       setQuestion(res.data.nextQuestion);
+      console.log('calling speak')
+      speak(res.data.nextQuestion.question);
       setAnswer("");
     } else {
       setCompleted(true);
