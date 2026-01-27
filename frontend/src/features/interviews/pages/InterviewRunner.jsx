@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from '../../../shared/utils/api'
-import { useAudioRecorder } from "../../voice/hooks/useAudioRecorder";
 import { useAiVoice } from "../hooks/useAiVoice";
+import { useVoiceEngine } from "../../voice/hooks/useVoiceEngine";
 
 const InterviewRunner = () => {
   const { id } = useParams();
@@ -15,8 +15,14 @@ const InterviewRunner = () => {
   const [answer, setAnswer] = useState("");
   const [completed, setCompleted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState({
+    current: 0,
+    total: 0,
+  });
+
 
   const socketRef = useRef(null);
+  const answerRef = useRef(null);
   const { speak } = useAiVoice();
 
   useEffect(() => {
@@ -45,7 +51,24 @@ const InterviewRunner = () => {
     };
   }, []);
 
-  const { startRecording, stopRecording } = useAudioRecorder(socketRef);
+  useEffect(() => {
+    if (question && answerRef.current) {
+      answerRef.current.focus();
+      answerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [question]);
+
+  const { startRecording, stopRecording } =
+    useVoiceEngine({
+      socketRef,
+      onTranscript: (text) => {
+        console.log("📝 Vapi transcript:", text);
+        setAnswer(text);
+      },
+    });
 
   const api = axios.create({
     baseURL: API_BASE_URL,
@@ -58,6 +81,10 @@ const InterviewRunner = () => {
     setLoading(true);
     const res = await api.post(`/interviews/${id}/start`);
     setQuestion(res.data.currentQuestion);
+    setProgress({
+      current: res.data.currentIndex,
+      total: res.data.totalQuestions,
+    });
     console.log('calling speak')
     speak(res.data.currentQuestion.question);
     setStarted(true);
@@ -72,6 +99,10 @@ const InterviewRunner = () => {
 
     if (res?.data?.nextQuestion) {
       setQuestion(res.data.nextQuestion);
+      setProgress({
+        current: res.data.currentIndex,
+        total: res.data.totalQuestions,
+      });
       console.log('calling speak')
       speak(res.data.nextQuestion.question);
       setAnswer("");
@@ -105,12 +136,26 @@ const InterviewRunner = () => {
         </button>
       ) : (
         <>
+          <div className="w-full bg-gray-200 h-2 rounded">
+            <div
+              className="bg-blue-600 h-2 rounded"
+              style={{
+                width: `${(progress.current / progress.total) * 100}%`,
+              }}
+            />
+          </div>
+          {progress.total > 0 && (
+            <div className="text-sm text-gray-600">
+              Question {progress.current} of {progress.total}
+            </div>
+          )}
           <h2 className="text-lg font-semibold">
             {question?.question}
           </h2>
 
           <textarea
             className="w-full border p-2 rounded"
+            ref={answerRef}
             rows={5}
             placeholder="Type your answer..."
             value={answer}
@@ -135,8 +180,11 @@ const InterviewRunner = () => {
 
           <button
             onClick={submitAnswer}
-            disabled={loading}
-            className="px-4 py-2 bg-green-600 text-white rounded"
+            disabled={loading || !answer.trim()}
+            className={`px-4 py-2 rounded ${loading || !answer.trim()
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-600 text-white"
+              }`}
           >
             Submit Answer
           </button>

@@ -147,6 +147,9 @@ export const startInterview = async (req, res) => {
   res.json({
     message: "Interview started",
     currentQuestion: interview.questions[0],
+    currentIndex: interview.currentQuestionIndex + 1,
+    totalQuestions: interview.questions.length,
+
   });
 };
 
@@ -182,5 +185,9 @@ export const submitAnswer = async (req, res) => {
     message: "Answer submitted",
     nextQuestion:
       interview.questions[interview.currentQuestionIndex],
+    // currentQuestion,
+    currentIndex: interview.currentQuestionIndex + 1,
+    totalQuestions: interview.questions.length,
+
   });
 };
